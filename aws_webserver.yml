@@ -1,0 +1,18 @@
+- hosts: all
+  tasks:
+  - package:
+      name: "httpd"
+      state: present
+
+  - name: Copy file
+    template:
+      dest: "/var/www/html/index.html"
+      src: "index.html"
+    notify: web
+
+  handlers:
+  - name: web
+    service:
+      name: "httpd"
+      state: restarted
+      enabled: yes
