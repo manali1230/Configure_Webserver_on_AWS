@@ -1,0 +1,16 @@
+#launch instance
+- hosts: localhost
+  vars_files:
+    -  key.yml
+  tasks:
+    - ec2_instance:
+        region: ap-south-1
+        key_name: ELB
+        instance_type: t2.micro
+        image_id: ami-04b1ddd35fd71475a
+        vpc_subnet_id: subnet-73e0da1b
+        security_group: sg-077ae9609205596e1
+        name: myos
+        state: present
+        aws_access_key: "{{ akey }}"
+        aws_secret_key: "{{ skey }}"
